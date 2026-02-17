@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Health Monitor - Dashboard</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        body {
+            display: flex;
+            background-color: #f4f7f6;
+            height: 100vh;
+        }
+
+        /* --- SIDEBAR --- */
+        .sidebar {
+            width: 250px;
+            background-color: #2c3e50;
+            color: white;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .sidebar h2 {
+            font-size: 20px;
+            margin-bottom: 30px;
+            color: #3498db;
+        }
+
+        .sidebar-menu {
+            list-style: none;
+        }
+
+        .sidebar-menu li {
+            padding: 15px 0;
+            border-bottom: 1px solid #34495e;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .sidebar-menu li:hover {
+            color: #3498db;
+        }
+
+        /* --- MAIN CONTENT --- */
+        .main-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* --- NAVBAR --- */
+        .navbar {
+            height: 60px;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 30px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .user-info {
+            font-weight: bold;
+            color: #2c3e50;
+        }
+
+        .status-online {
+            color: #27ae60;
+            font-size: 14px;
+        }
+
+        /* --- DASHBOARD GRID --- */
+        .dashboard-container {
+            padding: 30px;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .card {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            text-align: center;
+        }
+
+        .card h3 {
+            color: #7f8c8d;
+            font-size: 16px;
+            margin-bottom: 15px;
+        }
+
+        .value {
+            font-size: 36px;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+
+        .unit {
+            font-size: 18px;
+            color: #95a5a6;
+        }
+
+        /* Sensor Colors */
+        .heart { color: #e74c3c; }
+        .spo2 { color: #2980b9; }
+        .temp { color: #f39c12; }
+
+        /* --- AI SECTION --- */
+        .ai-section {
+            grid-column: span 3;
+            background: #eef2f3;
+            padding: 20px;
+            border-radius: 15px;
+            border-left: 5px solid #3498db;
+            margin-top: 10px;
+        }
+
+        .ai-section h4 {
+            color: #2980b9;
+            margin-bottom: 10px;
+        }
+
+        .ai-badge {
+            background: #3498db;
+            color: white;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            text-transform: uppercase;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="sidebar">
+        <h2>Health IoT Pro</h2>
+        <ul class="sidebar-menu">
+            <li>🏠 Dashboard</li>
+            <li>📊 History Logs</li>
+            <li>⚙️ Device Settings</li>
+            <li onclick="location.href='index.html'" style="margin-top: auto; color: #e74c3c;">🚪 Logout</li>
+        </ul>
+    </div>
+
+    <div class="main-content">
+        <div class="navbar">
+            <div class="status-online">● Device Connected (ESP32)</div>
+            <div class="user-info">Patient: iotprojects@gmail.com</div>
+        </div>
+
+        <div class="dashboard-container">
+            
+            <div class="card">
+                <h3>Heart Beat</h3>
+                <div class="value heart">72 <span class="unit">BPM</span></div>
+            </div>
+
+            <div class="card">
+                <h3>Blood Oxygen</h3>
+                <div class="value spo2">98 <span class="unit">%</span></div>
+            </div>
+
+            <div class="card">
+                <h3>Body Temp</h3>
+                <div class="value temp">36.5 <span class="unit">°C</span></div>
+            </div>
+
+            <div class="ai-section">
+                <h4><span class="ai-badge">AI Analysis</span> TensorFlow Lite Monitoring</h4>
+                <p id="ai-status">Vitals are stable. No anomalies detected in the last 24 hours.</p>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        // Simulating Live Data Updates
+        setInterval(() => {
+            // This is where you would connect to your Cloud Database (Firebase)
+            const randomHeart = Math.floor(Math.random() * (85 - 70 + 1)) + 70;
+            document.querySelector('.heart').innerHTML = `${randomHeart} <span class="unit">BPM</span>`;
+        }, 3000);
+    </script>
+
+</body>
+</html>
